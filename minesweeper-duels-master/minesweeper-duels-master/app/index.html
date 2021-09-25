@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io();
+        let el;
+  
+        socket.on('time', (timeString) => {
+          el = document.getElementById('server-time');
+          el.innerHTML = 'Server time: ' + timeString;
+        });
+    </script>
+    <script defer src="/app/lobby.js"></script>
+    <script defer src="/app/minesweeper.js"></script>
+    <link rel="stylesheet" type="text/css" href="/app/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div id="lobby">
+        <h1 id="logo-title">Minesweeper<br>Duels</h1>
+        <div id="button-row">
+            <button id="button_create_room" class="lobby-button">Create Room</button>
+            <button id="button_join_room" class="lobby-button">In Room</button>
+        </div>
+        <h3 id="error_message" style="color: red;"></h3>
+        <input id="room_id" placeholder="">
+    </div>
+    
+    <div id="game" style="display:none">
+        <div class="game-col profile-col">
+            <h1>MINH ÁNH</h1>
+            <p id="self-time" class="timer"></p>
+            <div id="myMaxTime">
+                <div id="myTime"></div>
+            </div>
+        </div>
+        <div class="game-col">
+            <h1 id="game_room_number"></h1>
+            <h2 id="turn"></h2>
+            <div id="board"></div>
+        </div>
+        <div class="game-col profile-col">
+            <h1>BÉ ÁNH</h1>
+            <p id="other-time" class="timer"></p>
+            <div id="otherMaxTime">
+                <div id="otherTime"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
